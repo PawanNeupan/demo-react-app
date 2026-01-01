@@ -1,27 +1,24 @@
-// Import useState hook from React (used to store calculator values)
+// Import useState hook from React to store calculator values
 import { useState } from "react"
 
-// Import Button component from shadcn/ui
 import { Button } from "@/components/ui/button"
 
-// Calculator component
+
 const Calculator = () => {
 
-  // Stores what is currently shown on the calculator screen
-  // Starts with "0"
+  // Stores what is currently shown on the calculator screen default "0"
   const [currentInput, setCurrentInput] = useState("0")
 
-  // Stores the previous number (before pressing an operator)
-  // null means nothing is stored yet
+  // Stores the previous number 
   const [previousInput, setPreviousInput] = useState<string | null>(null)
 
-  // Stores the operator (+, -, *, ÷)
+  // Stores the operator 
   const [operator, setOperator] = useState<string | null>(null)
 
-  // Runs when a number button (0–9) is clicked
+  // run when number sis clicked
   const handleNumberClick = (num: string) => {
-    // If the screen shows 0, replace it
-    // Otherwise, add the number at the end
+   
+  // If the screen shows 0 then replace it Otherwise add the number at the end
     if (currentInput === "0") {
       setCurrentInput(num)
     } else {
@@ -72,8 +69,13 @@ const Calculator = () => {
         result = prev * current
         break
       case "÷":
-        // Prevent divide by zero
-        result = current === 0 ? 0 : prev / current
+        if (current === 0) {
+          setCurrentInput("Error")   // show Error on screen
+          setPreviousInput(null)
+          setOperator(null)
+          return
+        }
+        result = prev / current
         break
     }
 
@@ -92,7 +94,7 @@ const Calculator = () => {
     setOperator(null)
   }
 
-  // UI starts here
+ 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-500">
 
@@ -107,26 +109,29 @@ const Calculator = () => {
         {/* Buttons Grid */}
         <div className="grid grid-cols-4 gap-2">
 
-          {/* Number buttons */}
+          
           <Button variant="secondary" onClick={() => handleNumberClick("7")}>7</Button>
           <Button variant="secondary" onClick={() => handleNumberClick("8")}>8</Button>
           <Button variant="secondary" onClick={() => handleNumberClick("9")}>9</Button>
 
-          {/* Clear button */}
+          {/* Clear as C*/}
           <Button className="bg-green-600 text-white" onClick={clearAll}>C</Button>
 
           <Button variant="secondary" onClick={() => handleNumberClick("4")}>4</Button>
           <Button variant="secondary" onClick={() => handleNumberClick("5")}>5</Button>
           <Button variant="secondary" onClick={() => handleNumberClick("6")}>6</Button>
 
-          {/* Operator */}
+          
           <Button variant="destructive" onClick={() => handleOperator("÷")}>÷</Button>
+
 
           <Button variant="secondary" onClick={() => handleNumberClick("1")}>1</Button>
           <Button variant="secondary" onClick={() => handleNumberClick("2")}>2</Button>
           <Button variant="secondary" onClick={() => handleNumberClick("3")}>3</Button>
 
+
           <Button variant="destructive" onClick={() => handleOperator("*")}>*</Button>
+
 
           <Button variant="secondary" onClick={() => handleNumberClick("0")}>0</Button>
 
@@ -136,7 +141,7 @@ const Calculator = () => {
           <Button variant="destructive" onClick={() => handleOperator("+")}>+</Button>
           <Button variant="destructive" onClick={() => handleOperator("-")}>-</Button>
 
-          {/* Equals button */}
+          {/* Equals to button */}
           <Button
             className="col-span-4 bg-orange-400 hover:bg-orange-500 text-white"
             onClick={calculate}
@@ -150,5 +155,5 @@ const Calculator = () => {
   )
 }
 
-// Export component so Router can use it
-export default Calculator
+
+export default Calculator  // Export component for  Router

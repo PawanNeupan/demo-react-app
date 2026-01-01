@@ -14,12 +14,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./index.css";
 import App from "./App";
 
-// 1️⃣ Create Query Client
+//Create Query Client
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    {/* 2️⃣ Provide Query Client to app */}
+    {/*Provide Query Client to app */}
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>

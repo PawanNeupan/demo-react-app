@@ -27,7 +27,8 @@ It can perform basic arithmetic operations like +, -, *, and ÷.
 `http://localhost:5173`
 
 
-**difference between useEffect and useState.**
+# Difference between useEffect and useState.
+
 **useState :** it is a React Hook that lets you add a state variable to your component. where you can stores data in a component and update when data is changed.
 
 **useEffect :** it is a React Hook that lets you synchronize a component with an external system.It helps to perform side effect after component is rendered.

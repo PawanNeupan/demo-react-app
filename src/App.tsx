@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Calculator from "./pages/Calculator";
 import Users from "./pages/Users";
+import UsersWithStats from "./pages/UsersWithStats";
 
 const App = () => {
   return (
@@ -22,6 +23,9 @@ const App = () => {
         <Link to="/Users" className="hover:text-blue-500">
           Users
         </Link>
+        <Link to="/UsersWithStats" className="hover:text-blue-500">
+          UsersWithStats
+        </Link>
       </nav>
 
       {/* Main content container */}
@@ -35,6 +39,9 @@ const App = () => {
 
           
           <Route path="/Users" element={<Users />} />
+
+          <Route path="/UsersWithStats" element={<UsersWithStats />} />
+
         </Routes>
       </div>
     </Router>

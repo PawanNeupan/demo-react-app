@@ -156,4 +156,4 @@ const Calculator = () => {
 }
 
 
-export default Calculator  // Export component for  Router
+export default Calculator// Export component for  Router

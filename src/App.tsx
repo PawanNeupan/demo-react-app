@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Calculator from "./pages/Calculator";
 import Users from "./pages/Users";
 import UsersWithStats from "./pages/UsersWithStats";
+import UsersTable from "./pages/UsersTable"
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Link to="/UsersWithStats" className="hover:text-blue-500">
           UsersWithStats
         </Link>
+        <Link to="/users-table" className="hover:text-blue-500">Users Table</Link>
       </nav>
 
       {/* Main content container */}
@@ -42,6 +44,7 @@ const App = () => {
 
           <Route path="/UsersWithStats" element={<UsersWithStats />} />
 
+        <Route path="/users-table" element={<UsersTable />} />
         </Routes>
       </div>
     </Router>

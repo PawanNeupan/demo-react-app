@@ -6,6 +6,7 @@ import Calculator from "./pages/Calculator";
 import Users from "./pages/Users";
 import UsersWithStats from "./pages/UsersWithStats";
 import UsersTable from "./pages/UsersTable"
+import UsersSearchTable from "./pages/UsersSearchTable";
 
 const App = () => {
   return (
@@ -25,9 +26,12 @@ const App = () => {
           Users
         </Link>
         <Link to="/UsersWithStats" className="hover:text-blue-500">
-          UsersWithStats
+          UsersStats
         </Link>
         <Link to="/users-table" className="hover:text-blue-500">Users Table</Link>
+
+          <Link to="/users-search" className="hover:text-blue-500">UsersSearch</Link>
+
       </nav>
 
       {/* Main content container */}
@@ -45,6 +49,10 @@ const App = () => {
           <Route path="/UsersWithStats" element={<UsersWithStats />} />
 
         <Route path="/users-table" element={<UsersTable />} />
+
+        <Route path="/users-search" element={<UsersSearchTable />} />
+
+
         </Routes>
       </div>
     </Router>

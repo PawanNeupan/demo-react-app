@@ -8,6 +8,7 @@ import UsersWithStats from "./pages/UsersWithStats";
 import UsersTable from "./pages/UsersTable"
 import UsersSearchTable from "./pages/UsersSearchTable";
 import UsersOptimisticUpdate from "./pages/UsersOptimisticUpdate"
+import CreateUserForm from "./pages/CreateUserForm"
 const App = () => {
   return (
     // Router wraps the entire app to enable routing
@@ -31,7 +32,11 @@ const App = () => {
         <Link to="/users-table" className="hover:text-blue-500">Users Table</Link>
 
           <Link to="/users-search" className="hover:text-blue-500">UsersSearch</Link>
-          <Link to="/UsersOptimisticUpdate" className="hover:text-blue-500">/UsersOptimistic</Link>
+          <Link to="/UsersOptimisticUpdate" className="hover:text-blue-500">UsersOptimistic</Link>
+          <Link to="/CreateUserForm" className="hover:text-blue-500">CreateUserForm</Link>
+
+          
+
 
       </nav>
 
@@ -54,6 +59,9 @@ const App = () => {
         <Route path="/users-search" element={<UsersSearchTable />} />
 
         <Route path="/UsersOptimisticUpdate" element={<UsersOptimisticUpdate />} />
+
+        <Route path="/CreateUserForm" element={<CreateUserForm />} />
+
 
         </Routes>
       </div>

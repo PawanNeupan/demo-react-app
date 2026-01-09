@@ -1,9 +1,6 @@
 import { useState } from "react" 
 
 import { useForm, useFieldArray } from "react-hook-form"
-// useForm: built-in hook that manages form state, validation, and submission
-// useFieldArray: built-in hook to manage dynamic array fields (add/remove multiple inputs)
-
 import { z } from "zod" 
 import { zodResolver } from "@hookform/resolvers/zod" 
 
@@ -22,23 +19,14 @@ const userSchema = z.object({
 // 2️⃣ TypeScript type from schema
 // ---------------------------
 type UserFormData = z.infer<typeof userSchema>
-// z.infer automatically converts schema to TypeScript type
-// Now UserFormData has { name: string, companies: { companyName: string, role: string }[] }
 
-// ---------------------------
-// 3️⃣ Component
-// ---------------------------
+
 const CreateUserForm = () => {
 
-  // ---------------------------
-  // 3a️⃣ Local state for submitted users
-  // ---------------------------
   const [users, setUsers] = useState<UserFormData[]>([])
-  // stores all users submitted via the form
 
-  // ---------------------------
-  // 3b️⃣ Setup useForm
-  // ---------------------------
+  //Setup useForm
+ 
   const { 
     register,        // connects input element to form state (tracks value & validation)
     control,         // required by useFieldArray to manage array fields
@@ -46,27 +34,20 @@ const CreateUserForm = () => {
     formState: { errors }, // object that stores validation errors automatically
     reset,           // resets form to default values
   } = useForm<UserFormData>({
-    resolver: zodResolver(userSchema), // connects Zod schema validation
+    resolver: zodResolver(userSchema),
     defaultValues: {
       name: "",                       // initial value for name input
       companies: [{ companyName: "", role: "" }] // initial array with one empty company
     }
   })
 
-  // ---------------------------
-  // 3c️⃣ Setup useFieldArray
-  // ---------------------------
   const { fields, append, remove } = useFieldArray({
-    control,   // connect to useForm
+    control,
     name: "companies", // which array field to manage
   })
-  // fields → current array items (each has built-in id for key)
-  // append → built-in function to add a new company
-  // remove → built-in function to remove a company by index
+  
 
-  // ---------------------------
-  // 3d️⃣ Form submit handler
-  // ---------------------------
+  
   const onSubmit = (data: UserFormData) => {
     setUsers([...users, data]) 
     reset()                  
@@ -91,7 +72,7 @@ const CreateUserForm = () => {
             placeholder="Enter user name"
           />
           {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
-          {/* built-in: errors object contains validation messages automatically */}
+          
         </div>
 
         {/* Dynamic Companies */}
@@ -128,7 +109,7 @@ const CreateUserForm = () => {
             </div>
           ))}
 
-          {/* Display array-level error */}
+          
           {errors.companies?.message && <p className="text-red-500 text-sm">{errors.companies.message}</p>}
 
           {/* Add company button */}

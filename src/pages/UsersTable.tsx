@@ -24,12 +24,10 @@ type User = {
 // 2️⃣ API FUNCTION
 // --------------------
 // This function fetches users based on PAGE NUMBER
-// page comes from the URL (?page=1, ?page=2, etc.)
+
 const fetchUsers = async (page: number): Promise<User[]> => {
 
   // Call API with pagination
-  // _page = page number
-  // _limit = users per page
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/users?_page=${page}&_limit=2`
   )
@@ -48,32 +46,21 @@ const fetchUsers = async (page: number): Promise<User[]> => {
 // --------------------
 const UsersTable = () => {
 
-  // useSearchParams lets us:
-  // - READ query params from URL
-  // - UPDATE query params in URL
   const [searchParams, setSearchParams] = useSearchParams()
 
-  // Read "page" from the URL
-  // Example: ?page=2 → page = 2
-  // If page is missing → default to 1
   const page = Number(searchParams.get("page")) || 1
 
-  // useQuery fetches data
-  // It will REFETCH whenever "page" changes
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["users", page], // 🔑 page controls cache & refetch
     queryFn: () => fetchUsers(page), // fetch users for this page
   })
   
 
-  // --------------------
-  // 4️⃣ LOADING STATE
-  // --------------------
-  // While API request is running
+  
   if (isLoading) {
     return (
       <div className="p-6 space-y-4">
-        {/* Skeletons shown instead of real data */}
         {[1, 2].map((i) => (
           <Skeleton key={i} className="h-16 w-full" />
         ))}
@@ -81,17 +68,11 @@ const UsersTable = () => {
     )
   }
 
-  // --------------------
-  // 5️⃣ ERROR STATE
-  // --------------------
-  // If API request fails
   if (isError) {
     return <p className="p-6 text-red-500">Error loading users</p>
   }
   
-  // --------------------
-  // 6️⃣ UI (SUCCESS STATE)
-  // --------------------
+
   return (
     <div className="p-6 space-y-4">
 
